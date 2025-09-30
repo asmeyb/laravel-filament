@@ -22,6 +22,11 @@ class SupplierResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::Truck;
 
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Supplier Management';
+    }
+
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Schema $schema): Schema

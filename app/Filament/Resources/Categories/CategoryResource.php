@@ -20,6 +20,11 @@ class CategoryResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::Folder;
 
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Inventory Management';
+    }
+
     protected static ?string $recordTitleAttribute = 'yes';
 
     public static function form(Schema $schema): Schema

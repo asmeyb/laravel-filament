@@ -12,6 +12,7 @@ class ListCategories extends ListRecords
 
     protected function getHeaderActions(): array
     {
+        //dd(CategoryResource::getUrl());
         return [
             CreateAction::make(),
         ];
