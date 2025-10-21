@@ -3,9 +3,11 @@
 namespace App\Filament\Resources\Suppliers\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Notifications\Notification;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -42,6 +44,19 @@ class SuppliersTable
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
+                DeleteAction::make()
+                ->before(function($action, $record){
+                    if($record->purchaseOrders()->exists()) {
+                        Notification::make()
+                            ->title('Cannot delete supplier!!')
+                            ->body('The Supplier has ongoing purchase orders.')
+                            ->danger()
+                            ->send();
+
+                        $action->cancel();
+                        $action->halt();
+                    }
+                }),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

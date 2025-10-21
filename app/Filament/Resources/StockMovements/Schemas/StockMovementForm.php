@@ -20,14 +20,14 @@ class StockMovementForm
                     ->searchable()
                     ->preload()
                     ->required(),
-                // Select::make('user_id')
-                //     ->relationship('user', 'name')
-                //     ->searchable()
-                //     ->default(auth()->id())
-                //     ->disabled()
-                //     ->preload()
-                //     ->dehydrated()
-                //     ->required(),
+                Select::make('user_id')
+                    ->relationship('user', 'name')
+                    ->searchable()
+                    ->default(auth()->id())
+                    ->disabled()
+                    ->preload()
+                    ->dehydrated()
+                    ->required(),
                 ToggleButtons::make('type')
                     ->options(['in' => 'Stock In', 'out' => 'Stock Out'])
                     ->colors(['in' => 'success', 'out' => 'danger'])
